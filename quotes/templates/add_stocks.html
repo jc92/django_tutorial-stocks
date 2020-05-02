@@ -1,0 +1,33 @@
+{% extends 'base.html'%}
+{% block content %}
+
+<H1> Add stocks </H1>
+<form action="{% url 'add_stocks'  %}" class="form-inline my-2 my-lg-0" method="POST">
+                {% csrf_token  %}
+              <input class="form-control mr-sm-2" type="search" placeholder="Stock Quote" aria-label="Search" name ="ticker">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Add ticker</button>
+</form>
+<br/>
+
+
+<table class="table table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Ticker</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+
+      {% for item in ticker%}
+        <tr>
+            <th scope="row"> {{item}} </th>
+
+            <td>{{item}} | <a href = "{% url 'del_stocks' item.id %}"> Delete Stock </a> <br/></th>
+        </tr>
+
+     {% endfor %}
+
+  </tbody>
+</table>
+{% endblock %}
